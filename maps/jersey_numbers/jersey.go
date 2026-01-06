@@ -52,3 +52,17 @@ func (r Roster) Update(number int, newName string) (string, error) {
 
 	return r[number], nil
 }
+
+func (r Roster) Delete(number int) error {
+	_, _, err := r.Search(number)
+	switch err {
+	case ErrNumberNotFound:
+		return ErrNumberDoesNotExist
+	case nil:
+		delete(r, number)
+	default:
+		return err
+	}
+
+	return nil
+}

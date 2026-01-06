@@ -18,8 +18,12 @@ var (
 type Dictionary map[string]string
 
 func (d Dictionary) Search(word string) (string, error) {
-	definiton := d[word]
-	return definiton, nil
+	definition, ok := d[word]
+	if !ok {
+		return "", ErrWordNotFound
+	}
+
+	return definition, nil
 }
 
 /*

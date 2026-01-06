@@ -15,7 +15,7 @@ func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 
 	for {
-		fmt.Println("\n-----WHAT DO YOU WANT TO DO-----\n1 - Search Player By Number\n2 - Add Player\n3 - Edit Player by Jersey Number\n0 - Exit")
+		fmt.Println("\n-----WHAT DO YOU WANT TO DO-----\n1 - Search Player By Number\n2 - Add Player\n3 - Update Player Name\n4 - Delete Player\n0 - Exit")
 		fmt.Println("Enter Option:")
 
 		scanner.Scan()
@@ -31,6 +31,8 @@ func main() {
 			roster.addPlayer()
 		case 3:
 			roster.updatePlayer()
+		case 4:
+			roster.deletePlayer()
 		case 0:
 			fmt.Println("Thanks for visiting!")
 			return
@@ -108,5 +110,25 @@ func (r Roster) updatePlayer() {
 	} else {
 		fmt.Println("Successfully updated player")
 		fmt.Println("Number:", updateNum, "New name:", updatedName)
+	}
+}
+
+func (r Roster) deletePlayer() {
+	scanner := bufio.NewScanner(os.Stdin)
+
+	fmt.Println("Enter Player Number:")
+	scanner.Scan()
+	deleteNum, err := strconv.Atoi(scanner.Text())
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	err = r.Delete(deleteNum)
+	if err != nil {
+		fmt.Println(strings.Repeat("_", 50))
+		fmt.Println(err)
+		fmt.Println(strings.Repeat("_", 50))
+	} else {
+		fmt.Println("Successfully deleted player")
 	}
 }
