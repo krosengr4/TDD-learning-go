@@ -44,13 +44,13 @@ func main() {
 		scanner.Scan()
 		userOption, err := strconv.Atoi(scanner.Text())
 		if err != nil {
-			fmt.Errorf("Invalid number: %v", err)
+			fmt.Println("Invalid number:", err)
 		}
 
 		var userAmount int
 
 		if userOption == 1 || userOption == 2 {
-			fmt.Println("Enter the amount: $")
+			fmt.Println("Enter the amount:")
 			scanner.Scan()
 			userAmount, err = strconv.Atoi(scanner.Text())
 			if err != nil {
@@ -67,7 +67,7 @@ func main() {
 				fmt.Println(err)
 			}
 		case 3:
-			fmt.Println("Your Bitcoin Amount: $" + strconv.Itoa(int(w.Balance)))
+			fmt.Println("Your Bitcoin Amount:" + strconv.Itoa(int(w.Balance)))
 		case 4:
 			fmt.Println("\nSee you soon!")
 			return
