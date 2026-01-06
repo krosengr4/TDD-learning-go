@@ -61,6 +61,21 @@ func TestUpdate(t *testing.T) {
 	})
 }
 
+func TestDelete(t *testing.T) {
+	roster := Roster{1: "Test Test"}
+
+	t.Run("Delete player", func(t *testing.T) {
+		number := 1
+		err := roster.Delete(number)
+
+		assertError(t, err, nil)
+
+		_, _, err = roster.Search(number)
+
+		assertError(t, err, ErrNumberNotFound)
+	})
+}
+
 // Helper func to assert actual and expected values
 func assertString(t testing.TB, act, exp string) {
 	t.Helper()
