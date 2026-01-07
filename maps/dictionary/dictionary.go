@@ -73,11 +73,3 @@ func (d Dictionary) Delete(word string) error {
 	return nil
 }
 
-
-
-
-/*
-- Add func
-- Search func
-- Update func
-*/
