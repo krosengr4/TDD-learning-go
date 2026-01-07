@@ -26,6 +26,56 @@ func (d Dictionary) Search(word string) (string, error) {
 	return definition, nil
 }
 
+func (d Dictionary) Add(word, definition string) error {
+
+	_, err := d.Search(word)
+	switch err {
+	case ErrWordNotFound:
+		d[word] = definition
+	case nil:
+		return ErrWordExists
+	default:
+		return err
+	}
+
+	return nil
+}
+
+func (d Dictionary) Update(word, newDefinition string) error {
+
+	_, err := d.Search(word)
+
+	switch err {
+	case ErrWordNotFound:
+		return ErrWordDoesNotExist
+	case nil:
+		d[word] = newDefinition
+	default:
+		return err
+	}
+
+	return nil
+}
+
+func (d Dictionary) Delete(word string) error {
+
+	_, err := d.Search(word)
+
+	switch err {
+	case ErrWordNotFound:
+		return ErrWordDoesNotExist
+	case nil:
+		delete(d, word)
+	default:
+		return err
+	}
+
+	return nil
+}
+
+
+
+
 /*
 - Add func
 - Search func
